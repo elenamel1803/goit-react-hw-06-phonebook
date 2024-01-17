@@ -9,6 +9,7 @@ const ContactForm = ({ contacts, onAddContact }) => {
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
+
     if (name === 'name') {
       setName(value);
     } else if (name === 'number') {
