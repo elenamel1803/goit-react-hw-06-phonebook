@@ -10,10 +10,15 @@ const ContactForm = ({ contacts, onAddContact }) => {
   const handleChange = ({ target }) => {
     const { name, value } = target;
 
-    if (name === 'name') {
-      setName(value);
-    } else if (name === 'number') {
-      setNumber(value);
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'number':
+        setNumber(value);
+        break;
+      default:
+        return;
     }
   };
 
