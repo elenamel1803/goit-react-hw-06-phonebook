@@ -1,9 +1,14 @@
 import { useState } from 'react';
-import { nanoid } from 'nanoid';
 import { formatName, formatNumber } from 'helpers';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from '../../redux/contacts/contactsSelectors';
+import { addContact } from '../../redux/contacts/contactsSlice';
 import { Form, Label, Input, Button } from './ContactFormStyled';
 
-const ContactForm = ({ contacts, onAddContact }) => {
+const ContactForm = () => {
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -26,7 +31,6 @@ const ContactForm = ({ contacts, onAddContact }) => {
     evt.preventDefault();
 
     const newContact = {
-      id: nanoid(4),
       name: formatName(name.trim()),
       number: formatNumber(number.trim()),
     };
@@ -40,7 +44,7 @@ const ContactForm = ({ contacts, onAddContact }) => {
       return;
     }
 
-    onAddContact(newContact);
+    dispatch(addContact(newContact));
 
     reset();
   };

@@ -1,12 +1,22 @@
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contacts/contactsSlice';
 import { Item, Button, Text } from './ContactListStyled';
 
-const ContactListItem = ({ id, name, number, onDeleteContact }) => {
+const ContactListItem = ({ contact }) => {
+  const { id, name, number } = contact;
+
+  const dispatch = useDispatch();
+
+  const onDeleteContact = () => {
+    dispatch(deleteContact(id));
+  };
+
   return (
     <Item>
-      <Text>
+      <Text id={id}>
         {name}: {number}
       </Text>
-      <Button onClick={() => onDeleteContact(id)}>Delete</Button>
+      <Button onClick={onDeleteContact}>Delete</Button>
     </Item>
   );
 };
